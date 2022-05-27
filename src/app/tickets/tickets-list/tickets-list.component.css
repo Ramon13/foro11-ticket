@@ -1,4 +1,4 @@
-.ticket-list__item-tag {
+.ticket-list__item-tag, .ticket-list__item-status, .ticket-list__item-priority {
 	display: inline-block;
 	font-size: small;
 	color: #333;
@@ -12,6 +12,12 @@
 	min-width: 16px;
 	text-align: right;
 	border-radius: 4px;
+}
+
+.ticket-list__item-status, .ticket-list__item-priority {
+	display: block;
+	max-width: 120px;
+	text-align: center;
 }
 
 .ticket-list__item-created-at {

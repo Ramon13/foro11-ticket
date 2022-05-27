@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ITicket, tickets} from '../../tickets';
+import { ITicket} from '../../tickets';
+import { TicketsService } from '../../tickets.service';
 
 @Component({
   selector: 'app-tickets-list',
@@ -7,11 +8,12 @@ import { ITicket, tickets} from '../../tickets';
   styleUrls: ['./tickets-list.component.css']
 })
 export class TicketsListComponent implements OnInit {
-  tickets: ITicket[] = tickets;
+  tickets: ITicket[] | undefined;
 
-  constructor() { }
-
+  constructor(private ticketService: TicketsService) { }
+  
   ngOnInit(): void {
+    this.tickets = this.ticketService.getAll();  
   }
 
 }

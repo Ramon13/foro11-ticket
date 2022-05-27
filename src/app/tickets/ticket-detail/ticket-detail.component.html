@@ -1,0 +1,26 @@
+<section class="w3-container ticket-detail">
+  <header class="w3-container ticket-title">
+    <h2>{{ticket?.title}}</h2>
+  </header>
+  <ul class="w3-ul w3-white w3-card w3-twothird">
+    <li class="ticket-detail__comment" *ngFor="let comment of ticket?.comments">
+      <div>
+        <i class="fa-solid fa-user"></i>
+        <div class="ticket-detail__comment-register">
+          <p class="ticket-detail__comment-user">{{comment.user}}</p>
+          <p class="ticket-detail__comment-updated-at">{{comment.createdAt | date}}</p>
+        </div>
+        <div>
+          <p>{{comment.message}}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="w3-container w3-third w3-light-gray">
+    <div class="ticket-detail__comment-metadata">
+      <p><span class="meta-key">Criado por:</span><span class="meta-value">{{ticket?.user}}</span></p>
+      <p><span class="meta-key">Aberto em:</span><span class="meta-value">{{ticket?.createdAt | date}}</span></p>
+      <p><span class="meta-key">Última atualização:</span><span class="meta-value">{{ticket?.createdAt | date}}</span></p>
+    </div>
+  </div>
+</section>

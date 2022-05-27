@@ -1,0 +1,37 @@
+i.fa-solid.fa-user {
+    padding: 16px;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    position: relative;
+    top: -9px;
+}
+
+.ticket-detail__comment-register {
+    display: inline-block;
+}
+
+p.ticket-detail__comment-user, p.ticket-detail__comment-updated-at {
+    margin: .3em .7em;
+    font-size: small;
+}
+
+.ticket-detail__comment-metadata p{
+	font-size: small;
+}
+
+.ticket-detail__comment-metadata .meta-key {
+	font-weight: bold;
+}
+
+.ticket-detail__comment-metadata .meta-value {
+  float: right;
+}
+
+.ticket-detail__comment-metadata {
+  width: 65%;
+}
+
+.ticket-title h2{
+	padding: 22px;
+	font-weight: bold;
+}
