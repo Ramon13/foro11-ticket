@@ -1,0 +1,28 @@
+.ticket-list__item-tag {
+	display: inline-block;
+	font-size: small;
+	color: #333;
+	padding: 0.7em;
+	background-color: #EEE;
+	line-height: 1em;
+	position: relative;
+	left: -1px;
+	top: -4px;
+	margin-right: .5em;
+	min-width: 16px;
+	text-align: right;
+	border-radius: 4px;
+}
+
+.ticket-list__item-created-at {
+	display: inline-block;
+	padding: .7em 0;
+	line-height: 1em;  
+}
+
+.ticket-list__item-created-at span {
+	font-size: small;
+	color: #333;
+	position: relative;
+	top: -4px;
+}
