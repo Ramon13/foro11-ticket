@@ -35,3 +35,19 @@ p.ticket-detail__comment-user, p.ticket-detail__comment-updated-at {
 	padding: 22px;
 	font-weight: bold;
 }
+
+.ticket-detail__comment-add button{
+	padding: .8rem;
+	margin: 12px 0;
+	border-radius: 4px;
+	font-size: 1em;
+	color: #333;
+	background-color: #eee;
+	font-weight: bold;
+	float: right;
+}
+
+.ticket-detail__comment-add button:hover {
+	color: white;
+	background-color: #42545c;
+}

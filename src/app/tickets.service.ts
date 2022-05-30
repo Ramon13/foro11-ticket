@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ITicket, tickets} from './tickets';
+import { ITicket, ITicketComment, STATUS, ticketsDB} from './tickets';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketsService {
-  tickets: ITicket[] = tickets;
+  tickets: ITicket[] = ticketsDB;
   
   constructor() { }
   
@@ -13,7 +13,29 @@ export class TicketsService {
     return this.tickets;
   }
   
+  getAllOpen() {
+    return this.tickets.filter(ticket => ticket.status == STATUS.open);
+  }
+  
+  getAllNotListed() {
+    return ticketsDB.filter(ticket => ticket.status == STATUS.notListed);
+  }
+  
+  getAllFinished() {
+    return this.tickets.filter(ticket => ticket.status == STATUS.finished);
+  }
+  
   getTicket(ticketId: number) {
     return this.tickets.find(ticket => ticket.id == ticketId);
+  }
+  
+  addComment(ticketId:number, message: string) {
+    const comment: ITicketComment = {
+      message: message,
+      user: "loggedUser",
+      createdAt: new Date()
+    };
+    
+    this.getTicket(ticketId)?.comments?.push(comment);
   }
 }

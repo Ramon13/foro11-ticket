@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor'; 
+
 import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketsComponent } from './tickets.component';
 import { TicketsHeaderComponent } from './tickets-header/tickets-header.component';
@@ -14,8 +18,11 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
     TicketDetailComponent
   ],
   imports: [
-	CommonModule,
-    TicketsRoutingModule
+	 CommonModule,
+	 FormsModule,
+   TicketsRoutingModule,
+   HttpClientModule,
+   AngularEditorModule
   ]
 })
 export class TicketRequestsModule { }

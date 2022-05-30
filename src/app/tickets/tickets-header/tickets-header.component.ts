@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { STATUS } from '../../tickets';
+import { TicketsService } from '../../tickets.service';
 
 @Component({
   selector: 'app-tickets-header',
@@ -7,9 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TicketsHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ticketsService: TicketsService) { }
 
   ngOnInit(): void {
   }
-
 }
