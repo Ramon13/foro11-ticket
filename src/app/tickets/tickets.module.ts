@@ -9,13 +9,15 @@ import { TicketsComponent } from './tickets.component';
 import { TicketsHeaderComponent } from './tickets-header/tickets-header.component';
 import { TicketsListComponent } from './tickets-list/tickets-list.component';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+import { TicketRegisterComponent } from './ticket-register/ticket-register.component';
 
 @NgModule({
   declarations: [
     TicketsComponent,
     TicketsHeaderComponent,
     TicketsListComponent,
-    TicketDetailComponent
+    TicketDetailComponent,
+    TicketRegisterComponent
   ],
   imports: [
 	 CommonModule,

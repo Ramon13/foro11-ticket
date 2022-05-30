@@ -11,8 +11,7 @@
           <h4>
             <a routerLink="/tickets/{{ticket.id}}">{{ticket.title}}</a>
           </h4>
-          <div class="ticket-list__item-tag"
-            *ngFor="let tag of ticket.tags">
+          <div class="ticket-list__item-tag" *ngFor="let tag of ticket.tags">
             <a>{{tag}}</a>
           </div>
           <div class="ticket-list__item-created-at">
