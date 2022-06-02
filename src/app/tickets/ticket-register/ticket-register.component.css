@@ -1,0 +1,30 @@
+h2 {
+	font-weight: bold;
+  font-size: 1.8rem;
+}
+
+form.ticket-form {
+	max-width: 40rem;
+}
+
+ .ticket-form__item{
+	margin: 3rem 0 0 0;
+}
+
+.valid {
+	outline-color: #CDDC39;
+	border-color: #CDDC39;
+}
+
+.invalid {
+  outline-color: red;
+  border-color: red;
+}
+
+.error-message {
+	color: red;
+}
+
+#angularEditor {
+	background-color: blue;
+}

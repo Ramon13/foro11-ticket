@@ -1,8 +1,73 @@
-<section>
-  <header class="w3-container">
+<section class="w3-container">
+  <header>
     <h2>Novo Ticket</h2>
   </header>
-  <form class="ticket-form">
+  <form class="w3-container ticket-form" [formGroup]="ticketForm">
+    <div class="ticket-form__item">
+      <label>Título</label>
+  
+      <input 
+        type="text" 
+        class="w3-input"
+        formControlName="title"
+        [class.valid]="ticketForm.controls['title'].valid"
+        [class.invalid]="ticketForm.controls['title'].invalid &&
+          (ticketForm.controls['title'].touched || ticketForm.controls['title'].dirty)" 
+      />
     
+      <div *ngIf="ticketForm.controls['title'].invalid &&
+          (ticketForm.controls['title'].touched || ticketForm.controls['title'].dirty)">
+        <small class="error-message" *ngIf="ticketForm.controls['title'].hasError('minlength')">
+          This field needs at least 4 characters
+        </small>
+        <small class="error-message" *ngIf="ticketForm.controls['title'].hasError('required')">
+          This field cannot be empty
+        </small>
+      </div>
+    </div>
+        
+    <div class="ticket-form__item">
+      <label>Descrição</label>
+      
+      <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
+      
+      <div *ngIf="ticketForm.controls['description'].invalid">
+        <small class="error-message" *ngIf="ticketForm.controls['title'].hasError('minlength')">
+          This field needs at least 4 characters
+        </small>
+        <small class="error-message" *ngIf="ticketForm.controls['description'].hasError('required')">
+          This field cannot be empty
+        </small>
+      </div>
+    </div>
+    
+    
+    <div class="ticket-form__item">
+      <label>Prioridade</label>
+      <select class="w3-select">
+        <option *ngFor="let priority of priorityList">
+          {{ priority }}
+        </option>
+      </select>
+    </div>
+    
+    <div class="ticket-form__item">
+      <label>Auditoria</label>
+      <select class="w3-select">
+        <option *ngFor="let auditorship of auditorshipList">
+          {{ auditorship }}
+        </option>
+      </select>
+    </div>
+    
+    <div class="ticket-form__item">
+      <label>Local (sala)</label>
+      <input type="text" class="w3-input"/>
+    </div>
+    
+    <div class="ticket-form__item">
+      <label>Etiquetas</label>
+      <app-tag-selector></app-tag-selector>
+    </div>
   </form>
 </section>
