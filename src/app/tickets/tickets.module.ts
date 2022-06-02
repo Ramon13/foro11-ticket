@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import { TagsModule } from '../tags/tags.module';
 
 import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketsComponent } from './tickets.component';
@@ -24,7 +26,9 @@ import { TicketRegisterComponent } from './ticket-register/ticket-register.compo
 	 FormsModule,
    TicketsRoutingModule,
    HttpClientModule,
-   AngularEditorModule
+   AngularEditorModule,
+   ReactiveFormsModule,
+   TagsModule
   ]
 })
 export class TicketRequestsModule { }

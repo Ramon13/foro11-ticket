@@ -15,6 +15,18 @@ export interface ITicketComment {
   createdAt: Date
 }
 
+export const PRIORITIES = [
+  "Baixo",
+  "Normal",
+  "Alto"
+];
+
+export const AUDITORSHIPS = [
+  "1AUD11",
+  "2AUD11",
+  "FORO11"
+];
+
 export const STATUS = {
   open: "open",
   finished: "finished",
