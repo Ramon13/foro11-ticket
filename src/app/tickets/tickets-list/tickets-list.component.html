@@ -11,13 +11,25 @@
           <h4>
             <a routerLink="/tickets/{{ticket.id}}">{{ticket.title}}</a>
           </h4>
-          <div class="ticket-list__item-tag" *ngFor="let tag of ticket.tags">
-            <a>{{tag}}</a>
-          </div>
+          
+	        <div class="ticket-list__item-tag" *ngFor="let tag of ticket.tags">
+	          <i class="fa fa-tag" aria-hidden="true"></i>
+	          {{ tag }}
+	        </div>
+		      
           <div class="ticket-list__item-created-at">
             <span>{{ticket.createdAt | date}}</span>
           </div>
         </div>
+        
+        <div class="dropdown ticket-list__item-more">
+	        <a class="w3-button">
+	          <i class="fa-solid fa-ellipsis-vertical"></i>
+	        </a>
+	        <div class="dropdown-content" (click)="removeTicket(ticket.id)">
+	         <a class="w3-bar-item">Excluir</a>
+	        </div>
+	      </div>
       </div>
 		</li>
 	</ul>

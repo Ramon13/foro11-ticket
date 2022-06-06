@@ -12,12 +12,12 @@ form.ticket-form {
 }
 
 .valid {
-	outline-color: #CDDC39;
+	outline: 2px solid #CDDC39;
 	border-color: #CDDC39;
 }
 
 .invalid {
-  outline-color: red;
+  outline: 2px solid red;
   border-color: red;
 }
 
@@ -25,6 +25,38 @@ form.ticket-form {
 	color: red;
 }
 
-#angularEditor {
-	background-color: blue;
+ul.tag-list li:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.selected-tags__tag {
+  display: inline-block;
+  background-color: lightblue;
+  padding: .3rem 2rem .3rem .5rem;
+  margin: 0.3rem;
+  border-radius: 40px;
+  position: relative;
+}
+
+.selected-tags__tag button{
+  width: 1.2rem;
+  border-radius: 50%;
+  border: none;
+  height: 1.2rem;
+  position: absolute;
+  top: .4rem;
+  right: .4rem;
+}
+
+.selected-tags__tag button span {
+  position: absolute;
+  top: -2px;
+  left: 6px;
+}
+
+ul.tag-list {
+  position: absolute;
+  bottom: 1rem;
+  background-color: #fff;
 }

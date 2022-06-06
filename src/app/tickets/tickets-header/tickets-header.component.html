@@ -1,9 +1,14 @@
 <section class="w3-container ticket-requests">
   <h2 class="ticket-requests__header-title">Tickets</h2>
   <div class="ticket-category">
-  	<a [routerLink]="['/tickets']" [queryParams]="{status: 'not-listed'}">Não Listados (0)</a>
-  	<a [routerLink]="['/tickets']" [queryParams]="{status: 'open'}">Abertos (12)</a>
-  	<a [routerLink]="['/tickets']" [queryParams]="{status: 'finished'}">Finalizados (100)</a>
+  	<a [routerLink]="['/tickets']" [queryParams]="{status: 'not-listed'}">
+  	 Não Listados ({{ countNotListed() }})
+ 	 </a>
+  	<a [routerLink]="['/tickets']" [queryParams]="{status: 'open'}">
+  	 Abertos ({{ countOpen() }})</a>
+  	<a [routerLink]="['/tickets']" [queryParams]="{status: 'finished'}">
+  	 Finalizados ({{ countFinished() }})
+  	</a>
   </div>
   <div>
     <a [routerLink]="['/tickets/register']">Novo Ticket</a>

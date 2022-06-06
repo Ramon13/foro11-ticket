@@ -32,3 +32,38 @@
 	position: relative;
 	top: -4px;
 }
+
+.ticket-list__item-tag {
+  display: inline-block;
+  background-color: lightblue;
+  padding: .3rem 1rem;
+  margin: 0.3rem;
+  border-radius: 40px;
+  position: relative;
+}
+
+div.ticket-list__item-more {
+	position: absolute;
+  right: 3rem;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  right: 0rem;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  cursor: pointer;
+}

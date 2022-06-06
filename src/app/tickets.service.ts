@@ -9,6 +9,15 @@ export class TicketsService {
   
   constructor() { }
   
+  addTicket(ticket: ITicket) {
+    this.tickets.push(ticket);
+  }
+  
+  removeTicket(ticketId: Number) {
+    this.tickets = this.tickets.filter(ticket => ticket.id != ticketId);
+    console.log(this.tickets);
+  }
+  
   getAll() {
     return this.tickets;
   }
@@ -37,5 +46,21 @@ export class TicketsService {
     };
     
     this.getTicket(ticketId)?.comments?.push(comment);
+  }
+  
+  countTickets() {
+    return this.tickets.length;
+  }
+  
+  countNotListed() {
+    return this.getAllNotListed().length;
+  }
+  
+  countOpen() {
+    return this.getAllOpen().length;
+  }
+  
+  countFinished() {
+    return this.getAllFinished().length;
   }
 }

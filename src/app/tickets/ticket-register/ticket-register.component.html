@@ -2,18 +2,15 @@
   <header>
     <h2>Novo Ticket</h2>
   </header>
-  <form class="w3-container ticket-form" [formGroup]="ticketForm">
+  
+  <form class="w3-container ticket-form" [formGroup]="ticketForm" (submit)="registerTicket()">
     <div class="ticket-form__item">
       <label>Título</label>
   
-      <input 
-        type="text" 
-        class="w3-input"
-        formControlName="title"
+      <input type="text" class="w3-input" formControlName="title"
         [class.valid]="ticketForm.controls['title'].valid"
         [class.invalid]="ticketForm.controls['title'].invalid &&
-          (ticketForm.controls['title'].touched || ticketForm.controls['title'].dirty)" 
-      />
+        (ticketForm.controls['title'].touched || ticketForm.controls['title'].dirty)" />
     
       <div *ngIf="ticketForm.controls['title'].invalid &&
           (ticketForm.controls['title'].touched || ticketForm.controls['title'].dirty)">
@@ -25,6 +22,7 @@
         </small>
       </div>
     </div>
+        
         
     <div class="ticket-form__item">
       <label>Descrição</label>
@@ -44,30 +42,84 @@
     
     <div class="ticket-form__item">
       <label>Prioridade</label>
-      <select class="w3-select">
-        <option *ngFor="let priority of priorityList">
+      
+      <select class="w3-select" formControlName="priority">
+        <option *ngFor="let priority of priorityList" [value]="priority">
           {{ priority }}
         </option>
       </select>
+      
+      <div *ngIf="ticketForm.controls['priority'].invalid &&
+          (ticketForm.controls['priority'].touched || ticketForm.controls['priority'].dirty)">
+        <small class="error-message" *ngIf="ticketForm.controls['priority'].hasError('required')">
+          This field cannot be empty
+        </small>
+      </div>
     </div>
+    
     
     <div class="ticket-form__item">
       <label>Auditoria</label>
-      <select class="w3-select">
-        <option *ngFor="let auditorship of auditorshipList">
+      
+      <select class="w3-select" formControlName="auditorship">
+        <option *ngFor="let auditorship of auditorshipList" [value]="auditorship">
           {{ auditorship }}
         </option>
       </select>
+      
+      <div *ngIf="ticketForm.controls['auditorship'].invalid &&
+          (ticketForm.controls['auditorship'].touched || ticketForm.controls['auditorship'].dirty)">
+        <small class="error-message" *ngIf="ticketForm.controls['auditorship'].hasError('required')">
+          This field cannot be empty
+        </small>
+      </div>
     </div>
+    
     
     <div class="ticket-form__item">
       <label>Local (sala)</label>
-      <input type="text" class="w3-input"/>
+      <input type="text" class="w3-input" formControlName="place" 
+        [class.valid]="ticketForm.controls['place'].valid"
+        [class.invalid]="ticketForm.controls['place'].invalid &&
+        (ticketForm.controls['place'].touched || ticketForm.controls['place'].dirty)" />
     </div>
+    
+    <div *ngIf="ticketForm.controls['place'].invalid && 
+      (ticketForm.controls['place'].touched || ticketForm.controls['place'].dirty)">
+      
+	    <small class="error-message" *ngIf="ticketForm.controls['place'].hasError('required')">
+	      This field cannot be empty
+	    </small>
+     </div>
+    
     
     <div class="ticket-form__item">
       <label>Etiquetas</label>
-      <app-tag-selector></app-tag-selector>
+      
+		  <div class="w3-container" style="position: relative">
+		    <ul class="w3-ul w3-card-4 tag-list" *ngIf="filteredTags">
+		      <li *ngFor="let tag of filteredTags" (click)="selectTag(tag)">{{ tag }}</li>
+		    </ul>
+		  </div>
+		  
+		  <input type="text" class="w3-input" 
+		    #filterTagKey (keyup)="filterTags(filterTagKey.value)"/>
+		  
+		  <div class="selected-tags">
+		    <div class="selected-tags__tag" *ngFor="let selectedTag of selectedTags">
+		      <i class="fa fa-tag" aria-hidden="true"></i>
+		      {{ selectedTag }}
+		      <button (click)="removeTag(selectedTag)">
+		        <span>&times;</span>
+		      </button>
+		    </div>
+		  </div>
     </div>
+    
+    <br /><br />
+    <button type="submit" class="w3-button w3-dark-grey"  
+      [disabled]="ticketForm.invalid">
+      Criar
+    </button>
   </form>
 </section>

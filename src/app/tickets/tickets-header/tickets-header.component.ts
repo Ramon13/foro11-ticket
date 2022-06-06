@@ -13,4 +13,16 @@ export class TicketsHeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  countNotListed() {
+    return this.ticketsService.countNotListed();
+  }
+  
+  countOpen() {
+    return this.ticketsService.countOpen();
+  }
+  
+  countFinished() {
+    return this.ticketsService.countFinished();
+  }
 }

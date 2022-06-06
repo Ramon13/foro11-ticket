@@ -33,6 +33,9 @@ export const STATUS = {
   notListed: "not-listed"
 }
 
+export const TAGS = [
+  "aker", "e-proc", "impressoras", "zoom", "rede", "wi-fi", "conta AD"];
+
 export const ticketsDB = [
   {
     id: 1,
