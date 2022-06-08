@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
-import { ITicket, ITicketComment, STATUS, ticketsDB} from './tickets';
+import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ITicket, ITicketComment, STATUS} from './tickets';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketsService {
-  tickets: ITicket[] = ticketsDB;
+  tickets: ITicket[] = [];
   
-  constructor() { }
+  private ticketsUrl = 'http://localhost:8080/tickets';
   
-  addTicket(ticket: ITicket) {
-    this.tickets.push(ticket);
+  httpOptions = {
+    headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+  }
+    
+  constructor(
+    private http: HttpClient
+  ) { }
+  
+  addTicket(ticket: ITicket): Observable<any> {
+    console.log(ticket);
+    return this.http.post<ITicket>(this.ticketsUrl, ticket, this.httpOptions);
   }
   
   removeTicket(ticketId: Number) {
@@ -18,24 +30,25 @@ export class TicketsService {
     console.log(this.tickets);
   }
   
-  getAll() {
-    return this.tickets;
+  getAll(): Observable<ITicket[]> {
+    return this.http.get<ITicket[]>(this.ticketsUrl, this.httpOptions);
   }
   
   getAllOpen() {
-    return this.tickets.filter(ticket => ticket.status == STATUS.open);
+    //return this.tickets.filter(ticket => ticket.status == STATUS.open);
   }
   
   getAllNotListed() {
-    return ticketsDB.filter(ticket => ticket.status == STATUS.notListed);
+    //return ticketsDB.filter(ticket => ticket.status == STATUS.notListed);
   }
   
   getAllFinished() {
-    return this.tickets.filter(ticket => ticket.status == STATUS.finished);
+    //return this.tickets.filter(ticket => ticket.status == STATUS.finished);
   }
   
   getTicket(ticketId: number) {
-    return this.tickets.find(ticket => ticket.id == ticketId);
+    const url = `${this.ticketsUrl}/${ticketId}`;
+    return this.http.get<ITicket>(url, this.httpOptions);
   }
   
   addComment(ticketId:number, message: string) {
@@ -45,7 +58,7 @@ export class TicketsService {
       createdAt: new Date()
     };
     
-    this.getTicket(ticketId)?.comments?.push(comment);
+    //this.getTicket(ticketId)?.comments?.push(comment);
   }
   
   countTickets() {
@@ -53,14 +66,14 @@ export class TicketsService {
   }
   
   countNotListed() {
-    return this.getAllNotListed().length;
+    //return this.getAllNotListed().length;
   }
   
   countOpen() {
-    return this.getAllOpen().length;
+    //return this.getAllOpen().length;
   }
   
   countFinished() {
-    return this.getAllFinished().length;
+    //return this.getAllFinished().length;
   }
 }

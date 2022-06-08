@@ -4,8 +4,8 @@
 		<li class="w3-padding-16 ticket-list__item" *ngFor="let ticket of tickets">
       <div class="w3-container">
         <div class="w3-third" style="width: 10%"> 
-          <p class="ticket-list__item-status">{{ticket.status}}</p>
-          <p class="ticket-list__item-priority">{{ticket.priority}}</p>
+          <p class="ticket-list__item-status">{{ticket.status?.description}}</p>
+          <p class="ticket-list__item-priority">{{ticket.priority.description}}</p>
         </div>
         <div class="w3-twothird">
           <h4>
@@ -14,7 +14,7 @@
           
 	        <div class="ticket-list__item-tag" *ngFor="let tag of ticket.tags">
 	          <i class="fa fa-tag" aria-hidden="true"></i>
-	          {{ tag }}
+	          {{ tag.name }}
 	        </div>
 		      
           <div class="ticket-list__item-created-at">
@@ -26,7 +26,7 @@
 	        <a class="w3-button">
 	          <i class="fa-solid fa-ellipsis-vertical"></i>
 	        </a>
-	        <div class="dropdown-content" (click)="removeTicket(ticket.id)">
+	        <div class="dropdown-content" (click)="removeTicket(1)">
 	         <a class="w3-bar-item">Excluir</a>
 	        </div>
 	      </div>

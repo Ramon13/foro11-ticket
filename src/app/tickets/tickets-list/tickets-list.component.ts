@@ -32,22 +32,17 @@ export class TicketsListComponent implements OnInit{
       switch(status) {
         
         case STATUS.open:
-          this.tickets = this.ticketsService.getAllOpen();
-          this.title = STATUS.open;
           break;          
         
         case STATUS.finished:
-          this.tickets = this.ticketsService.getAllFinished();
-          this.title = STATUS.finished
           break;
         
         case STATUS.notListed:
-          this.tickets = this.ticketsService.getAllNotListed();
-          this.title = STATUS.notListed;
           break;
         
         default:
-          this.tickets = this.ticketsService.getAll();
+          this.ticketsService.getAll()
+            .subscribe(tickets => this.tickets = tickets);
           break;
       }
     });

@@ -21,12 +21,12 @@ import { TicketRegisterComponent } from './ticket-register/ticket-register.compo
     TicketRegisterComponent
   ],
   imports: [
-	 CommonModule,
-	 FormsModule,
-   TicketsRoutingModule,
-   HttpClientModule,
-   AngularEditorModule,
-   ReactiveFormsModule,
+    CommonModule,
+	FormsModule,
+    TicketsRoutingModule,
+    HttpClientModule,
+    AngularEditorModule,
+    ReactiveFormsModule,
   ]
 })
 export class TicketRequestsModule { }

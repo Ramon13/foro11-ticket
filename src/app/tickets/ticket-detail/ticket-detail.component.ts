@@ -10,7 +10,7 @@ import { NotificationService } from '../../notification.service';
   styleUrls: ['./ticket-detail.component.css']
 })
 export class TicketDetailComponent implements OnInit {
-  ticket: ITicket | undefined;
+  ticket?: ITicket;
   pageComment: string = '';
   
   constructor(
@@ -22,7 +22,9 @@ export class TicketDetailComponent implements OnInit {
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     const ticketId = Number(routeParams.get('id'));
-    this.ticket = this.ticketService.getTicket(ticketId);
+    
+    this.getTicket(ticketId);
+    console.log(this.ticket);
   }
 
   addComment() {
@@ -30,4 +32,9 @@ export class TicketDetailComponent implements OnInit {
     const ticketId = Number(routeParams.get('id'));
     this.ticketService.addComment(ticketId, this.pageComment);
   }
+  
+  getTicket(ticketId: number) {
+    this.ticketService.getTicket(ticketId)
+        .subscribe(ticket => this.ticket = ticket);
+  } 
 }

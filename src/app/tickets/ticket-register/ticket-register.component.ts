@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TicketsService } from '../../tickets.service';
@@ -52,9 +52,9 @@ export class TicketRegisterComponent implements OnInit {
   selectedTags: Set<string> = new Set();
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
-    private ticketsService: TicketsService
+    private ticketsService: TicketsService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -84,24 +84,16 @@ export class TicketRegisterComponent implements OnInit {
   
   registerTicket() {
     const ticket: ITicket = {
-      id: this.ticketsService.countTickets() + 1,
       title: this.getTitle(),
-      user: "John Doe",
-      createdAt: new Date(),
-      tags: Array.from(this.selectedTags),
-      status: STATUS.open,
-      priority: this.getPriority(),
-      comments: [
-        {
-          message: this.getDescription(),
-          user: "John Doe",
-          createdAt: new Date()
-        }
-      ]
+      priority: { name: this.getPriority() },
+      tags: [],
+      comments: []
     }
     
-    this.ticketsService.addTicket(ticket);
-    this.router.navigate(['/tickets']);
+    
+    this.ticketsService.addTicket(ticket)
+        .subscribe(() => this.goBack());
+    //this.router.navigate(['/tickets']);
   }
   
   getTitle() {
@@ -122,5 +114,9 @@ export class TicketRegisterComponent implements OnInit {
   
   getAuditorship() {
     return this.ticketForm.get('auditorship')?.value;
+  }
+  
+  goBack(): void {
+    this.location.back();
   }
 }

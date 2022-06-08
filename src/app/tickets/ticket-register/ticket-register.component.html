@@ -44,8 +44,8 @@
       <label>Prioridade</label>
       
       <select class="w3-select" formControlName="priority">
-        <option *ngFor="let priority of priorityList" [value]="priority">
-          {{ priority }}
+        <option *ngFor="let priority of priorityList" [value]="priority.name">
+          {{ priority.description }}
         </option>
       </select>
       

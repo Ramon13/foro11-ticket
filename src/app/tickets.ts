@@ -1,12 +1,32 @@
 export interface ITicket {
-  id: number;
+  id?: number;
   title: string;
-  user: string,
-  createdAt: Date;
-  tags: string[];
-  status: string;
-  priority: string;
+  createdAt?: Date;
+  status?: TicketStatus;
+  priority: TicketPriority;
+  createdBy?: User,
+  tags: Tag[];
   comments: ITicketComment[] | undefined;
+}
+
+export interface User {
+  id: number;
+  name: string;
+}
+
+export interface Tag {
+  id: number;
+  name: string;
+}
+
+export interface TicketStatus {
+  name: string;
+  description: string;
+}
+
+export interface TicketPriority {
+  name: string;
+  description?: string;
 }
 
 export interface ITicketComment {
@@ -16,9 +36,9 @@ export interface ITicketComment {
 }
 
 export const PRIORITIES = [
-  "Baixo",
-  "Normal",
-  "Alto"
+  { name: "L", description: "Low" },
+  { name: "N", description: "Normal" },
+  { name: "H", description: "High" }
 ];
 
 export const AUDITORSHIPS = [
