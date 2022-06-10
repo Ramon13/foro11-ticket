@@ -98,7 +98,7 @@
       
 		  <div class="w3-container" style="position: relative">
 		    <ul class="w3-ul w3-card-4 tag-list" *ngIf="filteredTags">
-		      <li *ngFor="let tag of filteredTags" (click)="selectTag(tag)">{{ tag }}</li>
+		      <li *ngFor="let tag of filteredTags" (click)="selectTag(tag)">{{ tag.name }}</li>
 		    </ul>
 		  </div>
 		  
@@ -108,7 +108,7 @@
 		  <div class="selected-tags">
 		    <div class="selected-tags__tag" *ngFor="let selectedTag of selectedTags">
 		      <i class="fa fa-tag" aria-hidden="true"></i>
-		      {{ selectedTag }}
+		      {{ selectedTag.name }}
 		      <button (click)="removeTag(selectedTag)">
 		        <span>&times;</span>
 		      </button>

@@ -54,7 +54,7 @@ export class TicketsService {
   addComment(ticketId:number, message: string) {
     const comment: ITicketComment = {
       message: message,
-      user: "loggedUser",
+      createdBy: {name: "loggedUser"},
       createdAt: new Date()
     };
     

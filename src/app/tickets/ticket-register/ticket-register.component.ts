@@ -3,10 +3,12 @@ import { Location } from '@angular/common';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TicketsService } from '../../tickets.service';
+import { TagsService } from '../../tags.service';
+
 import { 
   PRIORITIES, 
   AUDITORSHIPS, 
-  TAGS,
+  Tag,
   STATUS, 
   ITicket
 } from '../../tickets';
@@ -47,25 +49,27 @@ export class TicketRegisterComponent implements OnInit {
   priorityList = PRIORITIES;
   auditorshipList = AUDITORSHIPS;
   
-  filterTagKey: string = '';
-  filteredTags: string[] = [];
-  selectedTags: Set<string> = new Set();
+  tags: Tag[] = [];
+  filteredTags: Tag[] = [];
+  selectedTags: Set<Tag> = new Set();
 
   constructor(
     private fb: FormBuilder,
     private ticketsService: TicketsService,
+    private tagService: TagsService,
     private location: Location
   ) { }
 
   ngOnInit(): void {
-    
+    this.tagService.getAll()
+      .subscribe(tags => this.tags = tags);
   }
   
-  selectTag(tagName: string) {
-    this.selectedTags.add(tagName);
+  selectTag(tag: Tag) {
+    this.selectedTags.add(tag);
   }
   
-  removeTag(selectedTag: string) {
+  removeTag(selectedTag: Tag) {
     this.selectedTags.delete(selectedTag);
   }
   
@@ -73,9 +77,9 @@ export class TicketRegisterComponent implements OnInit {
     this.filteredTags.length = 0;
     key = key.toUpperCase();
     
-    for (let tag of TAGS) {
+    for (let tag of this.tags) {
       if (key) {
-        if (tag.toUpperCase().indexOf(key) > -1) {
+        if (tag.name.toUpperCase().indexOf(key) > -1) {
           this.filteredTags.push(tag);
         }
       }
@@ -83,17 +87,28 @@ export class TicketRegisterComponent implements OnInit {
   }
   
   registerTicket() {
+    
+    console.log(this.getSelectedTags());
+    
     const ticket: ITicket = {
       title: this.getTitle(),
       priority: { name: this.getPriority() },
-      tags: [],
-      comments: []
+      tags: Array.from(this.selectedTags),
+      comments: [
+        {
+          message: this.getDescription(),
+          createdBy: {name: "loggedUser"}
+        }
+      ]
     }
     
     
     this.ticketsService.addTicket(ticket)
         .subscribe(() => this.goBack());
-    //this.router.navigate(['/tickets']);
+  }
+  
+  getSelectedTags() {
+    return JSON.stringify(Array.from(this.selectedTags));
   }
   
   getTitle() {

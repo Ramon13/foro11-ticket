@@ -1,21 +1,21 @@
+export interface Tag {
+  id: number;
+  name: string;
+}
+
 export interface ITicket {
   id?: number;
   title: string;
   createdAt?: Date;
   status?: TicketStatus;
   priority: TicketPriority;
-  createdBy?: User,
+  createdBy?: User;
   tags: Tag[];
   comments: ITicketComment[] | undefined;
 }
 
 export interface User {
-  id: number;
-  name: string;
-}
-
-export interface Tag {
-  id: number;
+  id?: number;
   name: string;
 }
 
@@ -31,8 +31,8 @@ export interface TicketPriority {
 
 export interface ITicketComment {
   message: string,
-  user: string,
-  createdAt: Date
+  createdBy: User,
+  createdAt?: Date;
 }
 
 export const PRIORITIES = [
