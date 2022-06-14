@@ -4,14 +4,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TicketsService } from '../../tickets.service';
 import { TagsService } from '../../tags.service';
-
-import { 
-  PRIORITIES, 
-  AUDITORSHIPS, 
-  Tag,
-  STATUS, 
-  ITicket
-} from '../../tickets';
+import { PRIORITIES, AUDITORSHIPS, Tag, ITicket } from '../../tickets';
 
 @Component({
   selector: 'app-ticket-register',
@@ -87,21 +80,16 @@ export class TicketRegisterComponent implements OnInit {
   }
   
   registerTicket() {
-    
-    console.log(this.getSelectedTags());
-    
     const ticket: ITicket = {
       title: this.getTitle(),
       priority: { name: this.getPriority() },
       tags: Array.from(this.selectedTags),
       comments: [
         {
-          message: this.getDescription(),
-          createdBy: {name: "loggedUser"}
+          message: this.getDescription()
         }
       ]
     }
-    
     
     this.ticketsService.addTicket(ticket)
         .subscribe(() => this.goBack());
