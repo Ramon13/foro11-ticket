@@ -31,7 +31,7 @@ export interface TicketPriority {
 
 export interface ITicketComment {
   message: string,
-  createdBy: User,
+  createdBy?: User,
   createdAt?: Date;
 }
 
@@ -52,10 +52,7 @@ export const STATUS = {
   finished: "finished",
   notListed: "not-listed"
 }
-
-export const TAGS = [
-  "aker", "e-proc", "impressoras", "zoom", "rede", "wi-fi", "conta AD"];
-
+  
 export const ticketsDB = [
   {
     id: 1,
