@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { TicketsService } from '../../tickets.service';
 import { 
   PRIORITIES, 
@@ -52,7 +52,7 @@ export class TicketRegisterComponent implements OnInit {
   selectedTags: Set<string> = new Set();
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private ticketsService: TicketsService,
     private location: Location
   ) { }
