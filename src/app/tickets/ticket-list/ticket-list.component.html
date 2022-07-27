@@ -1,0 +1,20 @@
+<div class="grid">
+  <div class="col-10 m-auto">
+    <p-card>
+      <div *ngFor="let ticket of tickets">
+        <p>
+          <span class="title">{{ticket.title}}</span>
+          <span class="ticket-date">created at: {{ticket.createdAt | date}}</span>
+          <p-tag styleClass="mr-2" [style]="{fontSize: '0.65rem'}"
+            [severity]="getTicketSeverity(ticket.priority)" 
+            value="priority: {{ticket.priority}}"></p-tag>
+        </p>
+
+        <p-chip *ngFor="let tag of ticket.tags" label="{{tag.name}}"
+          styleClass="mr-2" [style]="{fontSize: '0.75rem'}"></p-chip>
+        <p-divider></p-divider>
+      </div>
+      
+    </p-card>     
+  </div>
+</div>

@@ -1,7 +1,11 @@
-<div class="container">
-  <app-header></app-header>
-  <div class="w3-main main" style="padding-top: 22px;">
-    <router-outlet></router-outlet>
+<div>
+  <app-topbar (togglingSidebar)="toggleSidebar()"></app-topbar>
+  <div class="grid">
+    <div [ngClass]="sidebarGrid">
+      <app-sidebar [(display)]="display" (displayChange)="onToggleSidebar()"></app-sidebar>
+    </div>
+    <div [ngClass]="routerOutletGrid">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
-<app-footer></app-footer>
