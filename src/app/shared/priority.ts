@@ -1,0 +1,1 @@
+export const priorityValues: string[] = ['All', 'High', 'Normal', 'Low'];

@@ -1,7 +1,13 @@
-span.title {
-  font-size: 1.3rem;
+a.title {
+  font-size: 1.1rem;
+  color: white;
   margin: 0;
   font-weight: bold;
+  text-decoration: none;
+}
+
+a.title:hover {
+  text-decoration: underline
 }
 
 span.ticket-date {
@@ -11,4 +17,12 @@ span.ticket-date {
 
 .m-chip {
   font-size: 0.75rem;
+}
+
+div.p-menubar-end {
+  width: 100%;
+}
+
+.menu-bar {
+  display: inline-flex;
 }

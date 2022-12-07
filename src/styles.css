@@ -4,3 +4,12 @@ body {
   margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
+
+.app-spinner {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.flex-spacer-30 {
+  flex: 1 30px;
+}

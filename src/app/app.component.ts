@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,21 +7,27 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  display: boolean = true; 
+  showSidebar: boolean = false;
   routerOutletGrid: any[] = [];
   sidebarGrid: any[] = [];
   title = 'foro11-tickets';
+  
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    
+    this.onToggleSidebar();
   }
 
   toggleSidebar() {
-    this.display = !this.display; 
+    this.showSidebar = !this.showSidebar;
+  }
+
+  showTopbar() {
+    return this.router.url !== '/login';
   }
 
   onToggleSidebar() {
-    if (this.display) {
+    if (this.showSidebar) {
       this.sidebarGrid = [
         'lg:col-2',
         'md:col-3',
@@ -31,9 +38,9 @@ export class AppComponent implements OnInit{
         'md:col-9'
       ];
     
-    }else {
+    } else {
       this.routerOutletGrid = [
-      'col-12'
+        'col-12'
       ]  
     }
   }

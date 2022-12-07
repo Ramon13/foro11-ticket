@@ -1,41 +1,44 @@
-{{ticket | json}}
-{{formData.form.valid | json}}
 <div class="grid">
-  <div class="col-10 m-auto">
-    <div class="col-12">
-      <h1>Novo Ticket</h1>
-    </div>
-    <form autocomplete="off" #formData="ngForm" (ngSubmit)="save(formData)">
-      <div class="col-12 field p-fluid">
-        <label>Título</label>
-        <input type="text" name="title" [(ngModel)]="ticket.title" 
-          pInputText required minlength=8 #title="ngModel">
-        <small class="p-error" *ngIf="title.hasError('required') && title.touched">Informe um título</small>
-        <small class="p-error" *ngIf="title.hasError('minlength') && title.dirty">É necessário fornecer no mínimo 8 caracteres</small>
-      </div>
-      <div class="col-12 field p-fluid">
-        <label>Descrição</label>
-        <textarea pInputTextarea></textarea>
-      </div>
-      <div class="col-12 field p-fluid">
-        <label>Prioridade</label>
-        <p-listbox [options]="priorityList" optionLabel="name" optionValue="alias" 
-          name="priority" [(ngModel)]="ticket.priority" required></p-listbox>
-      </div>
-      <div class="col-12 field p-fluid">
-        <label>Etiquetas</label>
-        <p-autoComplete [suggestions]="filteredTags" (completeMethod)="filterTags($event)" 
-          field="name" (onSelect)="selectTag($event)"></p-autoComplete>
-      </div>
-      <div class="flex flex-row flex-wrap">
-        <p-splitButton *ngFor="let tag of selectedTags" label="{{tag}}"
-          styleClass="p-button-outlined p-button-rounded p-button-sm mb-2 mr-2">
-        </p-splitButton>
-      </div>
+<div class="col-8 m-auto">
+    <p-card>
       <div class="col-12">
-        <button pButton type="submit" label="Create" class="p-button-raised"
-          [disabled]="formData.invalid"></button>
+        <h1>Novo Ticket</h1>
       </div>
-    </form>
+      <form autocomplete="off" #ngForm="ngForm" (ngSubmit)="save(ngForm)">
+        <div class="col-12 field p-fluid">
+          <label>Título</label>
+          <input type="text" [disabled]="saveTicket" name="title" [(ngModel)]="ticket.title" pInputText required minlength=8 #title="ngModel">
+          <small class="p-error" *ngIf="title.hasError('required') && title.touched">Informe um título</small>
+          <small class="p-error" *ngIf="title.hasError('minlength') && title.dirty">É necessário fornecer no mínimo 8 caracteres</small>
+        </div>
+        <div class="col-12 field p-fluid">
+          <label>Descrição</label>
+          <p-editor name="description"></p-editor>
+        </div>
+        <div class="col-12 field p-fluid">
+          <label>Prioridade</label>
+          <p-listbox [disabled]="saveTicket" [options]="priorities" [(ngModel)]="ticket.priority" name="priority" required></p-listbox>
+        </div>
+        <div class="col-12 field p-fluid">
+          <label>Etiquetas</label>
+          <p-autoComplete [disabled]="saveTicket" #autoComplete type="search" [suggestions]="filteredTags" (completeMethod)="filterTags($event)" field="name" 
+            (onSelect)="selectTag($event)"></p-autoComplete>
+        </div>
+        <div class="flex flex-row flex-wrap">
+          <p-splitButton [disabled]="saveTicket" *ngFor="let tag of ticket.tags" label="{{tag.name}}" styleClass="p-button-outlined p-button-rounded p-button-sm mb-2 mr-2"></p-splitButton>
+          <p-progressSpinner [hidden]="!saveTag" styleClass="app-spinner"></p-progressSpinner>
+        </div>
+        <div class="col-12 field p-fluid">
+          <label>Anexo</label>
+          <p-fileUpload #fileUpload name="files" [disabled]="saveTicket" (onSelect)="uploadFiles($event)" [multiple]="true" [showUploadButton]="false"
+            [showCancelButton]="false"></p-fileUpload>
+        </div>
+        <div class="col-12">
+          <button pButton type="submit" label="Create" class="p-button-raised" [disabled]="ngForm.invalid">
+            <p-progressSpinner [hidden]="!saveTicket" styleClass="app-spinner" strokeWidth="8"></p-progressSpinner>
+          </button>
+        </div>
+      </form>
+    </p-card>
   </div>
 </div>

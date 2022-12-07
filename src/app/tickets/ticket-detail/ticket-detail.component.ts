@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Comment, Ticket } from 'src/app/shared/ticket';
+import { TicketService } from 'src/app/services/ticket.service';
 import { ActivatedRoute } from '@angular/router';
-import { ITicket } from '../../tickets';
-import { TicketsService } from '../../tickets.service';
-import { NotificationService } from '../../notification.service';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -10,31 +9,41 @@ import { NotificationService } from '../../notification.service';
   styleUrls: ['./ticket-detail.component.css']
 })
 export class TicketDetailComponent implements OnInit {
-  ticket?: ITicket;
+  ticket?: Ticket;
+  comments: Comment[] = [];
   pageComment: string = '';
+  ticketId?: number;
   
   constructor(
-    private ticketService: TicketsService,
-    private notificationService: NotificationService,
-    private route: ActivatedRoute
+    private ticketService: TicketService,
+    private route: ActivatedRoute,
+    @Inject('baseURL') public baseURL: string 
   ) { }
 
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
-    const ticketId = Number(routeParams.get('id'));
-    
-    this.getTicket(ticketId);
-    console.log(this.ticket);
+    this.ticketId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.getTicket();
+    this.getComments();
   }
 
   addComment() {
 	  const routeParams = this.route.snapshot.paramMap;
     const ticketId = Number(routeParams.get('id'));
-    this.ticketService.addComment(ticketId, this.pageComment);
+    //this.ticketService.addComment(ticketId, this.pageComment);
   }
   
-  getTicket(ticketId: number) {
-    this.ticketService.getTicket(ticketId)
-        .subscribe(ticket => this.ticket = ticket);
+  getTicket() {
+    if (this.ticketId) {
+      this.ticketService.find(this.ticketId)
+          .then(ticket => this.ticket = ticket);
+    }
   } 
+  
+  getComments() {
+    if (this.ticketId) {
+      this.ticketService.listComments(this.ticketId)
+        .then(comments => this.comments = comments);
+    }
+  }
 }

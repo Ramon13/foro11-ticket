@@ -1,20 +1,40 @@
 <div class="grid">
-  <div class="col-10 m-auto">
+  <div class="col-8 m-auto">
+    <p-menubar [model]="statusMenu" >
+      <div class="menu-bar">
+        <form novalidate (ngSubmit)="search()">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText placeholder="search" name="searchKey" [(ngModel)]="searchKey">
+          </span>
+        </form>
+        <button pButton label="New ticket" [style]="{marginLeft: '10px'}" routerLink="/register"></button>
+      </div>
+    </p-menubar>
     <p-card>
       <div *ngFor="let ticket of tickets">
         <p>
-          <span class="title">{{ticket.title}}</span>
+          <a routerLink="/tickets/{{ticket.id}}" class="title">{{ticket.title}}</a>
           <span class="ticket-date">created at: {{ticket.createdAt | date}}</span>
-          <p-tag styleClass="mr-2" [style]="{fontSize: '0.65rem'}"
-            [severity]="getTicketSeverity(ticket.priority)" 
+          <p-tag styleClass="mr-2" [style]="{fontSize: '0.65rem'}" [severity]="getTicketSeverity(ticket.priority)" 
             value="priority: {{ticket.priority}}"></p-tag>
         </p>
 
-        <p-chip *ngFor="let tag of ticket.tags" label="{{tag.name}}"
-          styleClass="mr-2" [style]="{fontSize: '0.75rem'}"></p-chip>
+        <p-chip *ngFor="let tag of ticket.tags" label="{{tag.name}}" styleClass="mr-2" [style]="{fontSize: '0.75rem'}"></p-chip>
         <p-divider></p-divider>
       </div>
-      
-    </p-card>     
+
+      <div [hidden]="tickets != null">
+        <p>
+          <p-skeleton shape="list"></p-skeleton>
+        </p>
+        <p>
+          <p-skeleton shape="rectangle" width="30%"></p-skeleton>
+        </p>
+      </div>
+    </p-card>
+    <div [hidden]="tickets == null">
+      <p-paginator [rows]="pageSize" [totalRecords]="totalElements" (onPageChange)="paginate($event)"></p-paginator>
+    </div>     
   </div>
 </div>

@@ -1,32 +1,39 @@
-<section class="w3-container ticket-detail">
-  <header class="w3-container ticket-title">
-    <h2>{{ ticket?.title }}</h2>
-  </header>
-  <div class="w3-twothird">
-	  <ul class="w3-ul w3-white w3-card">
-	    <li class="ticket-detail__comment" *ngFor="let comment of ticket?.comments">
-	      <div>
-	        <i class="fa-solid fa-user"></i>
-	        <div class="ticket-detail__comment-register">
-	          <p class="ticket-detail__comment-user">{{ comment.createdBy }}</p>
-	          <p class="ticket-detail__comment-updated-at">{{comment.createdAt | date}}</p>
-	        </div>
-	        <div>
-	          <p [innerHTML]="comment.message"></p>
-	        </div>
-	      </div>
-	    </li>
-	  </ul>
-	  <div class="w3-panel ticket-detail__comment-add">
-	  	<angular-editor [(ngModel)]="pageComment">{{ pageComment }}</angular-editor>
-	  	<button type="button" (click)="addComment()">Adicionar</button>
-	  </div>
-  </div>
-  <div class="w3-container w3-third w3-light-gray">
-    <div class="ticket-detail__comment-metadata">
-      <p><span class="meta-key">Criado por:</span><span class="meta-value">{{ ticket?.createdBy?.name }}</span></p>
-      <p><span class="meta-key">Aberto em:</span><span class="meta-value">{{ ticket?.createdAt | date }}</span></p>
-      <p><span class="meta-key">Última atualização:</span><span class="meta-value">{{ ticket?.createdAt | date }}</span></p>
-    </div>
-  </div>
-</section>
+<div class="grid">
+	<div class="col-8 m-auto">
+		<div *ngIf="ticket">
+			<h1>{{ticket.title}}</h1>
+			<p-chip label="{{ticket.status | lowercase}}" styleClass="mr-2 custom-chip"></p-chip>
+			<span>{{ticket.createdBy?.name}}</span>
+			<span> | </span>
+			<span>{{ticket.createdAt | date}}</span>
+		</div>
+		<div [hidden]="ticket">
+			<p><p-skeleton shape="list"></p-skeleton></p>
+			<p><p-skeleton shape="rectangle" width="30%"></p-skeleton></p>
+		</div>
+		<div *ngFor="let comment of comments">
+			<p-divider></p-divider>
+			<div style="display: flex;">
+				<p-avatar image="https://randomuser.me/api/portraits/women/4.jpg" shape="circle" size="large"></p-avatar>
+				<span class="flex-spacer-30"></span>
+				<p-panel>
+					<ng-template pTemplate="header">
+						<p style="margin: 0;">
+							<span>{{comment.createdBy.name}}</span>
+							<span> | </span>
+							<span>{{comment.createdAt | date}}</span>
+						</p>
+					</ng-template>
+					<p>{{comment.message}}</p>
+					<a target="_blank" *ngFor="let image of comment.images" href="{{baseURL}}/tickets/{{ticket?.id}}/comments/{{comment.id}}/images/{{image.id}}">
+						<span>{{image.name}}</span> <br/>
+					</a>
+				</p-panel>
+			</div>
+		</div>
+		<div>
+			<p-divider></p-divider>
+			<p-editor name="description"></p-editor>
+		</div>
+	</div>
+</div>

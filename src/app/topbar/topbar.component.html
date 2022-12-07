@@ -1,7 +1,10 @@
 <nav class="navbar">
   <div class="grid">
-    <div class="col-8 m-auto">
+    <div class="col-11 m-auto">
       <a (click)="toggleSidebar()"><i class="pi pi-bars"></i></a>
+    </div>
+    <div class="col-1 m-auto">
+      <p-toggleButton onIcon="pi pi-moon" offIcon="pi pi-sun" (onChange)="switchTheme()"></p-toggleButton>
     </div>
   </div>
 </nav>

@@ -1,32 +1,39 @@
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarModule } from 'primeng/sidebar';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { InputTextModule } from 'primeng/inputtext';
+import {PasswordModule} from 'primeng/password';
+import {CheckboxModule} from 'primeng/checkbox';
 
 import { AppComponent } from './app.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { baseURL } from './shared/baseURL';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { TicketRequestsModule } from './tickets/tickets.module';
+import { SecurityModule } from './security/security.module';
 
+//enableProdMode();
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent,
     TopbarComponent,
     SidebarComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSnackBarModule,
+    TicketRequestsModule,
+    SecurityModule,
+    BrowserModule,
     HttpClientModule,
-    SidebarModule
+    SidebarModule,
+    ToggleButtonModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'baseURL', useValue: baseURL }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

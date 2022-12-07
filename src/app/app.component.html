@@ -1,8 +1,8 @@
 <div>
-  <app-topbar (togglingSidebar)="toggleSidebar()"></app-topbar>
+  <app-topbar *ngIf="showTopbar()" (togglingSidebar)="toggleSidebar()"></app-topbar>
   <div class="grid">
     <div [ngClass]="sidebarGrid">
-      <app-sidebar [(display)]="display" (displayChange)="onToggleSidebar()"></app-sidebar>
+      <app-sidebar [(display)]="showSidebar" (displayChange)="onToggleSidebar()"></app-sidebar>
     </div>
     <div [ngClass]="routerOutletGrid">
       <router-outlet></router-outlet>
